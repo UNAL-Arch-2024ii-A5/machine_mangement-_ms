@@ -3,6 +3,7 @@ package com.gymmaster.machine_management_ms.controller;
 import java.util.List;
 
 import com.gymmaster.machine_management_ms.dto.request.MachineServicesDTO;
+import com.gymmaster.machine_management_ms.dto.response.ResponseDTO;
 import com.gymmaster.machine_management_ms.dto.response.TypesMachines;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,10 +44,15 @@ public class MachineController {
         return ResponseEntity.ok(updatedMachine);
     }
 
+    @PutMapping("/use/{id}")
+    public ResponseEntity<ResponseDTO> updateUseMachine(@PathVariable Long id) {
+        ResponseDTO updatedMachine = machineService.updateMachineInUse(id);
+        return new ResponseEntity(updatedMachine.getMessage(),updatedMachine.getStatusCode());
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMachine(@PathVariable Long id) {
-        machineService.deleteMachine(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<ResponseDTO> deleteMachine(@PathVariable Long id) {
+        return ResponseEntity.ok(machineService.deleteMachine(id));
     }
 
     @PostMapping("/{machineId}/services")

@@ -13,4 +13,10 @@ public class ExceptionController {
         ExceptionDTO exceptionDto = new ExceptionDTO(e.getMessage());
         return new ResponseEntity<>(exceptionDto, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(NotAvailabilityException.class)
+    public ResponseEntity<?> notAvailable(NotAvailabilityException e) {
+        ExceptionDTO exceptionDto = new ExceptionDTO(e.getMessage());
+        return new ResponseEntity<>(exceptionDto, HttpStatus.CONFLICT);
+    }
 }
