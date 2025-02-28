@@ -21,6 +21,6 @@ public class MachineServices {
     private LocalDate date;
     private String description;
 
-    @Column(name = "machine_id", nullable = false)
+    @Column(name = "machine_id", insertable = false, updatable = false)
     private Long machineId;// ID de la máquina asociada
 }

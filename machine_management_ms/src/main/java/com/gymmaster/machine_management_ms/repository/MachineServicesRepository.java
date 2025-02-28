@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface MachineServicesRepository extends JpaRepository<MachineServices, Long> {
-    List<MachineServices> findByMachineId(Long machineId);
+     List<MachineServices> findByMachineId(Long machineId);
+     void deleteByMachineId(Long machineId);
 }

@@ -28,6 +28,6 @@ public class Machine {
     private Integer serviceInterval;// Intervalo de mantenimiento recomendado (en días)
     private String type;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "machine_id")
+    @JoinColumn(name = "machine_id", referencedColumnName = "id", nullable = false)
     private List<MachineServices> machineServices;
 }

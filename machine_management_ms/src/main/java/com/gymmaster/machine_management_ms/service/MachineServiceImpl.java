@@ -8,6 +8,7 @@ import com.gymmaster.machine_management_ms.dto.response.TypesMachines;
 import com.gymmaster.machine_management_ms.enums.StateMachine;
 import com.gymmaster.machine_management_ms.exception.NotAvailabilityException;
 import com.gymmaster.machine_management_ms.exception.NotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 
@@ -67,10 +68,12 @@ public class MachineServiceImpl implements IMachineService{
     }
 
     @Override
+    @Transactional
     public ResponseDTO deleteMachine(Long id) {
         if (!machineRepository.existsById(id)) {
             throw new NotFoundException("Machine not found with ID: " + id);
         }
+        machineServicesRepository.deleteByMachineId(id);
         machineRepository.deleteById(id);
         return new ResponseDTO("Machine with ID: "+ id + " deleted successfully!", HttpStatusCode.valueOf(204));
     }
